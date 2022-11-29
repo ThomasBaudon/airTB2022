@@ -1,3 +1,22 @@
 controllers:
     resource: ../src/Controller/
     type: attribute
+
+# home:
+#     path: /
+#     controller: App\Controller\Homecontroller::accueil
+
+# produit:
+#     path: /produit/{id<\d{1,2}>?0}
+    #?0 indique la valeur par défaut - <> indique le requirements
+    # controller : App\Controller\ProduitController::affiche
+    # defaults:
+    #     id: 0
+    # requirements:
+    #     id: '\d{1,2}'
+
+# produit-by-slug:
+#     path : /produit/{slug}
+#     controller : App\Controller\ProduitController::afficheBySlug
+#     requirements:
+#         slug: '[a-z]*'
