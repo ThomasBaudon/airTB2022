@@ -18,8 +18,8 @@ class TestController extends AbstractController
 
         $tableau = [
             1 => ['nom'=>'bleu', 'code'=>'#0000ff'],
-            1 => ['nom'=>'blanc', 'code'=>'#ffffff'],
-            1 => ['nom'=>'rouge', 'code'=>'#ff0000'],
+            2 => ['nom'=>'blanc', 'code'=>'#ffffff'],
+            3 => ['nom'=>'rouge', 'code'=>'#ff0000'],
         ];
 
 

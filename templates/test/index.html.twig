@@ -11,13 +11,15 @@
         </thead>
         <tbody>
             {% for ligne in liste %}
-            <tr>
-                <td>{{ligne.nom}}</td>
-                <td>{{ligne.code}}</td>
-            </tr>
+                <tr>
+                    <td>{{ligne.nom|upper}}</td>
+                    <td>{{ligne.code}}</td>
+                </tr>
             {% endfor %}
         </tbody>
     </table>
+
+    <img src="{{ asset('assets/img/image1.png') }}">
 
 
 {% endblock %}
