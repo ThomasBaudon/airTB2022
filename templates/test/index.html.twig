@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+
+    <table>
+        <thead>
+            <th>Couleur</th>
+            <th>Code</th>
+        </thead>
+        <tbody>
+            {% for ligne in liste %}
+            <tr>
+                <td>{{ligne.nom}}</td>
+                <td>{{ligne.code}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
+{% block footer %}Autre Pied de page{% endblock %}
