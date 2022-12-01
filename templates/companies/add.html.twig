@@ -9,6 +9,17 @@
         <div class="col-8">
             
             <h1>Nouvelle compagnie</h1>
+
+            {# {{ form(formulaire) }} intégrakité du formulaire #} 
+
+            {{ form_start(formulaire, {})}}
+                {# {{ form_widget(formulaire)}} #}
+
+                {{ form_row(formulaire.nom)}}
+                {{ form_row(formulaire.sigle)}}
+                {{ form_row(formulaire.employes)}}
+                <button class="btn btn-primary">VALIDER</button>
+            {{ form_end(formulaire)}}
         
         </div>
     </div>
