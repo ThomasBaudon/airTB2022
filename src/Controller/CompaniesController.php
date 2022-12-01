@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Company;
 use App\Repository\CompanyRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -23,10 +24,11 @@ class CompaniesController extends AbstractController
     }
 
     #[Route('/companies/{id}', name : "show_company")]
-    public function show(Request $request, CompanyRepository $repo, int $id) : Response{
+    // public function show(Request $request, CompanyRepository $repo, int $id) : Response{
+    public function show(CompanyRepository $repo, int $id, Company $company) : Response{ // Attention à bien rajouter le USE pour les classes
 
         // $id = $request->attributes->get('id'); // traité par le param converter
-        $company = $repo->find($id);
+        // $company = $repo->find($id);
 
         return $this->render('companies/show.html.twig', [
             'company' => $company,
