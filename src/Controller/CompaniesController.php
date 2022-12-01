@@ -23,7 +23,7 @@ class CompaniesController extends AbstractController
         ]);
     }
 
-    #[Route('/companies/{id}', name : "show_company")]
+    #[Route('/companies/{id}', name : "show_company", requirements: ['id'=>'\d+'])]
     // public function show(Request $request, CompanyRepository $repo, int $id) : Response{
     public function show(CompanyRepository $repo, int $id, Company $company) : Response{ // Attention à bien rajouter le USE pour les classes
 
@@ -33,5 +33,12 @@ class CompaniesController extends AbstractController
         return $this->render('companies/show.html.twig', [
             'company' => $company,
         ]);
+    }
+
+    #[Route('companies/create', name : "add_company")]
+    public function add(): Response {
+
+        return $this->render('companies/add.html.twig', []);
+
     }
 }

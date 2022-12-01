@@ -4,16 +4,37 @@
 
 {% block body %}
 
-    <table class="table">
-        {% for company in companies %}
-            <tr>
-                <td>{{ company.id}}</td>
-                <td>{{ company.nom}}</td>
-                <td>{{ company.sigle}}</td>
-                <td>{{ company.employes}}</td>
-            </tr>
-        {% endfor %}
-    </table>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-10">
 
+            <table class="table">
+                <thead>
+                    <th>#</th>
+                    <th>Nom</th>
+                    <th>Sigle</th>
+                    <th>Employés</th>
+                    <th>Action</th>
+                </thead>
+                {% for company in companies %}
+                    <tr>
+                        <td>{{ company.id}}</td>
+                        <td>{{ company.nom}}</td>
+                        <td>{{ company.sigle}}</td>
+                        <td>{{ company.employes}}</td>
+                        <td><a href="{{ path('show_company', {'id': company.id} ) }}" class="btn btn-dark">Voir</a></td>
+                        {# Dans TWIG les tableaux sont entre{} #}
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <a href="{{ path('add_company') }}" class="btn btn-primary mt-3">ajouter une compagnie</a>
+
+
+        </div>
+    </div>
+</div>
+
+    
 
 {% endblock %}
