@@ -24,6 +24,9 @@ class Ville
     #[ORM\OneToMany(mappedBy: 'ville', targetEntity: aeroport::class)]
     private Collection $aeroports;
 
+    #[ORM\Column]
+    private ?int $population = null;
+
     public function __construct()
     {
         $this->aeroports = new ArrayCollection();
@@ -84,6 +87,18 @@ class Ville
                 $aeroport->setVille(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPopulation(): ?int
+    {
+        return $this->population;
+    }
+
+    public function setPopulation(int $population): self
+    {
+        $this->population = $population;
 
         return $this;
     }

@@ -3,6 +3,8 @@
 namespace App\DataFixtures;
 
 use App\Entity\Ville;
+use Faker\Factory;
+use App\Entity\Aeroport;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -10,15 +12,24 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // $product = new Product();
+        
+        for($i=1; $i<6; $i++){
 
-        $ville = new Ville();
+            $aeroport = new Aeroport();
+            $aeroport
+                ->setNom("Aéroport $i")
+                ->setNbPistes($i);
+            $manager->persist($aeroport);
 
-        $ville
-            ->setNom('Paris')
-            ->setDepartement('75');
+            $ville = new Ville();
+            $ville
+                ->setNom("Ville $i")
+                ->setDepartement("75")
+                ->setPopulation($i * 50000)
+                ->addAeroport($aeroport);
+            $manager->persist($ville);
 
-        $manager->persist($ville);
+        }
 
         $manager->flush();
     }
