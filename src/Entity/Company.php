@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Entity;
-
+use Doctrine\Common\Collections\ArrayCollection;
 use App\Repository\CompanyRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -16,7 +16,7 @@ class Company
     #[ORM\Column(length: 128)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 3)]
+    #[ORM\Column(length: 10)]
     private ?string $sigle = null;
 
     #[ORM\Column]

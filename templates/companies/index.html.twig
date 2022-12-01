@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompaniesController!{% endblock %}
+
+{% block body %}
+
+    <table class="table">
+        {% for company in companies %}
+            <tr>
+                <td>{{ company.id}}</td>
+                <td>{{ company.nom}}</td>
+                <td>{{ company.sigle}}</td>
+                <td>{{ company.employes}}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+
+{% endblock %}
