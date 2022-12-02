@@ -24,7 +24,7 @@ class CompaniesController extends AbstractController
         ]);
     }
 
-    #[Route('/companies/{id}', name : "show_company", requirements: ['id'=>'\d+'],  methods: ['POST'])]
+    #[Route('/companies/{id}', name : "show_company", requirements: ['id'=>'\d+'],  methods: ['GET'])]
     // public function show(Request $request, CompanyRepository $repo, int $id) : Response{
     public function show(CompanyRepository $repo, int $id, Company $company) : Response{ // Attention à bien rajouter le USE pour les classes
 
@@ -37,11 +37,26 @@ class CompaniesController extends AbstractController
     }
 
     #[Route('companies/create', name : "add_company", methods: ['GET','POST'])]
-    public function add(): Response {
+    public function add(Request $request, CompanyRepository $repo): Response {
 
         $company = new Company();
 
         $formulaire = $this->createForm(CompanyType::class, $company);
+        $formulaire->handleRequest($request);
+
+        if( $formulaire->isSubmitted() && $formulaire->isValid()){
+
+            $repo->save($company, true);
+            return $this->redirectToRoute('app_companies');
+            // dd($company);
+            // dd($formulaire->getData());
+            // $company = new Company();
+            // $data = $formulaire->getData();
+            // $company->setEmployes($data['employes']);
+            // $company->setEmployes($data['nom']);
+            // persist
+            // flush
+        }
         
         return $this->render('companies/add.html.twig', [
             'formulaire' => $formulaire->createView(),
@@ -49,8 +64,23 @@ class CompaniesController extends AbstractController
 
     }
 
-    #[Route('companies/modify/{id}', name : "modify_company",  methods: ['PATCH'])]
-    public function modify(): Response {}
+    #[Route('companies/modify/{id}', name : "modify_company",  methods: ['GET','POST'])]
+    public function modify(Company $company, Request $request, CompanyRepository $repo)
+    {
+        // dd($company);
+        $formulaire = $this->createForm(CompanyType::class, $company);
+        $formulaire->handleRequest($request);
+
+        if($formulaire->isSubmitted() && $formulaire->isValid())
+        {
+            $repo->save($company, true);
+            return $this->redirectToRoute('app_companies');
+        }
+
+        return $this->render('companies/add.html.twig', [
+            'formulaire' => $formulaire->createView(),
+        ]);
+    }
 
     #[Route('companies/delete/{id}', name : "delete_company",  methods: ['DELETE'])]
     public function delete(): Response {}

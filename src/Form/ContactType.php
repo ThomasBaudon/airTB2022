@@ -4,6 +4,8 @@ namespace App\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -21,11 +23,44 @@ class ContactType extends AbstractType
                 'help'          => 'Texte aide',
                 'attr'          => [
                     'placeholder'   => 'Votre e-mail',
+                ],
+
+                'constraints'=>
+                    [
+                        new NotBlank(['message' => 'Champs obligatoire']),
+                    ]
+            ])
+            ->add('nom', TextType::class, [
+                'constraints'=>
+                    [
+                        new NotBlank(['message' => 'Champs obligatoire']),
+                        new Length([
+                            'max' => 10,
+                            'maxMessage' => '{{ limit }} caractères maximum'
+                        ]),
+                    ]
+            ])
+            ->add('sujet', TextType::class, [
+                'constraints'=>
+                    [
+                        new NotBlank(['message' => 'Champs obligatoire']),
+                        new Length([
+                            'min' => 4,
+                            'minMessage' => '{{ limit }} caractères minimum'
+                        ]),
+                    ]
+            ])
+            ->add('message', TextareaType::class, [
+                'constraints'=> [
+                    new NotBlank(['message' => 'Champs obligatoire']),
+                    new Length([
+                        'min' => 4,
+                        'minMessage' => '{{ limit }} caractères minimum',
+                        'max' => 10,
+                        'maxMessage' => '{{ limit }} caractères maximum'
+                    ])
                 ]
             ])
-            ->add('nom', TextType::class)
-            ->add('sujet', TextType::class)
-            ->add('message', TextareaType::class)
             ->add('submit', SubmitType::class); // On passe le type de champs en 2ème argument
         ;
     }
